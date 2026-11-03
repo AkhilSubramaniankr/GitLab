@@ -10,6 +10,7 @@ import { CodeBlock } from '@/components/learn/code-block'
 import { Quiz } from '@/components/learn/quiz'
 import { VSCodeInterfaceExplorer } from '@/components/labs/vscode-interface-explorer'
 import { CopilotChatSimulator } from '@/components/labs/copilot-chat-simulator'
+import { CodeSuggestionSimulator } from '@/components/labs/code-suggestion-simulator'
 import { TraditionalVsCopilotComparison } from '@/components/labs/partial-features'
 
 const day = CURRICULUM[1]
@@ -135,6 +136,12 @@ code --install-extension GitHub.copilot-chat   # for chat panel`} />
             <p className="text-xs text-muted-foreground leading-relaxed mb-2">Inline buttons above code: <strong>Explain</strong>, <strong>Fix</strong>, <strong>Refactor</strong>, <strong>Generate Docs</strong>, <strong>Generate Tests</strong>. Right-click for more.</p>
             <CodeBlock code={`# Hover a function → click "Generate Docs"\n# Copilot inserts a Google-style docstring`} language="python" maxHeight="120px" />
           </div>
+        </div>
+
+        <div className="mt-4">
+          <h3 className="font-semibold text-sm mb-2">Interactive: Code Suggestion Simulator</h3>
+          <p className="text-xs text-muted-foreground mb-3">Watch how Copilot generates inline suggestions as you type a comment. Accept, reject, or cycle through alternatives. (For full completion practice, see Day 3's Code Completion Playground.)</p>
+          <CodeSuggestionSimulator />
         </div>
       </LessonSection>
 

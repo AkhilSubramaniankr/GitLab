@@ -10,7 +10,7 @@ import { CodeBlock } from '@/components/learn/code-block'
 import { Quiz } from '@/components/learn/quiz'
 import { AgentLoopVisualizer } from '@/components/labs/agent-loop-visualizer'
 import { MultiFileProjectSimulator } from '@/components/labs/multi-file-simulator'
-import { MCPConceptExplorer, TerminalAssistanceDemo } from '@/components/labs/partial-features'
+import { MCPConceptExplorer, TerminalAssistanceDemo, AskPlanAgentComparison } from '@/components/labs/partial-features'
 import { CopilotChatSimulator } from '@/components/labs/copilot-chat-simulator'
 
 const day = CURRICULUM[8]
@@ -89,6 +89,12 @@ export function Day9View() {
         <Callout type="tip" title="Start with Plan, escalate to Agent">
           For unfamiliar tasks, ask Copilot to plan first. Review the plan. If it looks right, ask it to execute the plan in agent mode. This catches misunderstandings before any file is changed.
         </Callout>
+
+        <div className="mt-4">
+          <h3 className="font-semibold text-sm mb-2">Interactive: Compare Ask, Plan, and Agent on the Same Task</h3>
+          <p className="text-xs text-muted-foreground mb-3">Pick a Data Analytics task, then switch between Ask, Plan, and Agent modes to see how the prompt, actions, permissions, and output differ for the same goal.</p>
+          <AskPlanAgentComparison />
+        </div>
       </LessonSection>
 
       <LessonSection id="d9-multifile" title="4. Multi-File Project Awareness">

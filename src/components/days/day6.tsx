@@ -9,6 +9,7 @@ import { ConceptExplorer } from '@/components/learn/concept-explorer'
 import { CodeBlock } from '@/components/learn/code-block'
 import { Quiz } from '@/components/learn/quiz'
 import { BranchSimulator, PRSimulator } from '@/components/labs/branch-pr-simulator'
+import { MergeConflictLab } from '@/components/labs/merge-conflict-lab'
 import { CopilotChatSimulator } from '@/components/labs/copilot-chat-simulator'
 
 const day = CURRICULUM[5]
@@ -65,6 +66,12 @@ export function Day6View() {
             interview: { q: 'How do you minimize merge conflicts in a Data Analytics team?', a: '1) Small, short-lived branches. 2) Frequent rebase onto main (daily). 3) Modular code — separate files for separate concerns (cleaning.py vs analysis.py). 4) Clear ownership of files. 5) Communication before large refactors. 6) Pull main before starting a new feature.' },
           }}
         />
+
+        <div className="mt-4">
+          <h3 className="font-semibold text-sm mb-2">Interactive: Resolve Real Merge Conflicts</h3>
+          <p className="text-xs text-muted-foreground mb-3">Three Data Analytics scenarios. Read the conflict, choose a resolution (keep HEAD / keep incoming / combine / manual edit), then validate. The validator checks for leftover conflict markers, required elements, and syntax balance.</p>
+          <MergeConflictLab />
+        </div>
       </LessonSection>
 
       <LessonSection id="d6-pr" title="4. Pull Requests — Interactive Simulator">

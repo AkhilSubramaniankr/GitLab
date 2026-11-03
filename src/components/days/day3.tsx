@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { MessageSquareCode, ArrowRight, ArrowLeft, GitBranch, RefreshCw, Languages, FileCode2 } from 'lucide-react'
+import { MessageSquareCode, ArrowRight, ArrowLeft, GitBranch } from 'lucide-react'
 import { useAppStore } from '@/lib/store'
 import { CURRICULUM } from '@/lib/curriculum'
 import { TopicHeader, LessonSection, Callout, PracticalExercise } from '@/components/learn/topic-parts'
@@ -11,6 +11,7 @@ import { Quiz } from '@/components/learn/quiz'
 import { NLToPythonExplorer } from '@/components/labs/nl-to-python-explorer'
 import { CopilotChatSimulator } from '@/components/labs/copilot-chat-simulator'
 import { CodeCompletionPlayground } from '@/components/labs/code-completion-playground'
+import { CodeConversionLab } from '@/components/labs/code-conversion-lab'
 
 const day = CURRICULUM[2]
 
@@ -98,32 +99,10 @@ result = (df.groupby("product")["revenue"]
       </LessonSection>
 
       <LessonSection id="d3-conversion" title="5. Code Conversion Lab">
-        <div className="space-y-3">
-          <div className="rounded-lg border border-border p-4">
-            <h4 className="font-semibold text-xs mb-2 text-ai-cyan flex items-center gap-2"><RefreshCw className="w-3.5 h-3.5" /> Python loop → List comprehension</h4>
-            <div className="grid md:grid-cols-2 gap-2">
-              <CodeBlock language="python" title="Before" code={`squares = []\nfor i in range(10):\n    squares.append(i ** 2)`} maxHeight="120px" />
-              <CodeBlock language="python" title="After" code={`squares = [i ** 2 for i in range(10)]`} maxHeight="120px" />
-            </div>
-          </div>
-          <div className="rounded-lg border border-border p-4">
-            <h4 className="font-semibold text-xs mb-2 text-ai-purple flex items-center gap-2"><Languages className="w-3.5 h-3.5" /> Basic Python → Pandas</h4>
-            <div className="grid md:grid-cols-2 gap-2">
-              <CodeBlock language="python" title="Before" code={`total = 0\nfor v in df["revenue"]:\n    total += v\nprint(total)`} maxHeight="120px" />
-              <CodeBlock language="python" title="After" code={`total = df["revenue"].sum()\nprint(total)`} maxHeight="120px" />
-            </div>
-          </div>
-          <div className="rounded-lg border border-border p-4">
-            <h4 className="font-semibold text-xs mb-2 text-ai-green flex items-center gap-2"><FileCode2 className="w-3.5 h-3.5" /> Pandas aggregation → SQL</h4>
-            <div className="grid md:grid-cols-2 gap-2">
-              <CodeBlock language="python" title="Pandas" code={`df.groupby("region")["revenue"] \\\n  .sum() \\\n  .sort_values(ascending=False)`} maxHeight="120px" />
-              <CodeBlock language="sql" title="SQL" code={`SELECT region, SUM(revenue) AS total\nFROM sales\nGROUP BY region\nORDER BY total DESC;`} maxHeight="120px" />
-            </div>
-          </div>
-        </div>
-        <Callout type="warning" title="Behavior differences">
-          Pandas sum() skips NaN by default; SQL SUM also skips NULL but returns NULL if all values are NULL. Pandas sort is stable; SQL ORDER BY ties are implementation-defined. Always test converted code on real data.
-        </Callout>
+        <p className="text-sm leading-relaxed mb-3">
+          Convert code between Python, Pandas, and SQL. Each challenge shows original code and 3 conversion options — pick the correct one. The lab explains semantic differences and limitations after each answer.
+        </p>
+        <CodeConversionLab />
       </LessonSection>
 
       <LessonSection id="d3-review" title="6. Reviewing & Validating AI-Generated Code">
