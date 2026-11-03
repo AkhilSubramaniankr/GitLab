@@ -24,6 +24,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false)
   React.useEffect(() => setMounted(true), [])
 
+  // Auto-open sidebar on desktop (≥ 1024px), default closed on mobile.
+  React.useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)')
+    const handler = (e: MediaQueryListEvent | MediaQueryList) => {
+      if (e.matches) setSidebarOpen(true)
+      else setSidebarOpen(false)
+    }
+    handler(mq)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [setSidebarOpen])
+
   const searchInputRef = React.useRef<HTMLInputElement>(null)
 
   const totalLessons = 120 // approx across all days
@@ -98,6 +110,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                         setView((item as any).view)
                         if (window.innerWidth < 1024) setSidebarOpen(false)
                       }}
+                      aria-current={active ? 'page' : undefined}
+                      aria-label={(item as any).label}
                       className={cn(
                         'w-full flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm transition-colors text-left',
                         active

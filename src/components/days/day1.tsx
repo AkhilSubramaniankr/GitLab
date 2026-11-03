@@ -10,6 +10,7 @@ import { CodeBlock } from '@/components/learn/code-block'
 import { Quiz } from '@/components/learn/quiz'
 import { GitWorkflowSimulator } from '@/components/labs/git-workflow-simulator'
 import { GitCommandExplorer } from '@/components/labs/git-command-explorer'
+import { RepoStructureExplorer } from '@/components/labs/repo-structure-explorer'
 
 const day = CURRICULUM[0]
 
@@ -91,7 +92,7 @@ export function Day1View() {
           </div>
         </div>
         <Callout type="tip" title="The analogy">
-          Git is the录音机 (recording engine); GitHub is the Spotify that hosts and shares the recordings. You can use Git without GitHub, but most teams use both together.
+          Git is the recording engine; GitHub is the streaming service that hosts and shares the recordings. You can use Git without GitHub, but most teams use both together.
         </Callout>
       </LessonSection>
 
@@ -223,24 +224,8 @@ git push -u origin main`} />
       </LessonSection>
 
       <LessonSection id="d1-project" title="11. Uploading a Python Data Analytics Project">
-        <p className="text-sm leading-relaxed mb-3">A typical Pandas project structure:</p>
-        <CodeBlock language="bash" title="Recommended project structure" code={`sales-analysis/
-├── data/
-│   ├── raw/             # .gitignored — original CSVs
-│   ├── processed/       # .gitignored — cleaned outputs
-│   └── sample.csv       # tracked — small synthetic sample
-├── notebooks/
-│   └── eda.ipynb        # exploratory notebooks
-├── src/
-│   ├── cleaning.py      # data cleaning functions
-│   ├── analysis.py      # aggregation logic
-│   └── visualization.py # chart helpers
-├── tests/
-│   └── test_cleaning.py # pytest tests
-├── .gitignore
-├── requirements.txt     # pinned dependencies
-├── README.md            # project overview
-└── main.py              # entry point`} />
+        <p className="text-sm leading-relaxed mb-3">A typical Pandas project structure. Click any file or folder to see its purpose and sample contents:</p>
+        <RepoStructureExplorer />
       </LessonSection>
 
       <PracticalExercise id="d1-ex" title="Create a GitHub repository for a Pandas sales analysis project">

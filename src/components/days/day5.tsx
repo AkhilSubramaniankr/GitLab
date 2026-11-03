@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Bug, ArrowRight, ArrowLeft, FlaskConical, FileText, Code2, GitBranch } from 'lucide-react'
+import { Bug, ArrowRight, ArrowLeft, FlaskConical, FileText, Code2, GitBranch, XCircle, CheckCircle2 } from 'lucide-react'
 import { useAppStore } from '@/lib/store'
 import { CURRICULUM } from '@/lib/curriculum'
 import { TopicHeader, LessonSection, Callout, PracticalExercise } from '@/components/learn/topic-parts'
@@ -71,19 +71,32 @@ export function Day5View() {
       </LessonSection>
 
       <LessonSection id="d5-refactor" title="4. Code Refactoring, Optimization & Readability">
-        <p className="text-sm leading-relaxed mb-3">Refactoring changes structure without changing behavior. Use Copilot Chat to:</p>
+        <p className="text-sm leading-relaxed mb-3">Refactoring changes structure without changing behavior. Use Copilot Chat to refactor for readability, performance, and maintainability. The example below shows a typical "before vs after" with explanations of each change.</p>
         <div className="grid md:grid-cols-2 gap-3">
-          <div className="rounded-lg border border-border p-4">
-            <h4 className="font-semibold text-xs mb-1.5">Before</h4>
+          <div className="rounded-lg border-2 border-ai-red/40 bg-ai-red/5 p-4">
+            <h4 className="font-semibold text-xs mb-1.5 text-ai-red flex items-center gap-1.5"><XCircle className="w-3.5 h-3.5" /> Before</h4>
             <CodeBlock language="python" code={`r = df[df["rev"]>100].groupby("p").agg({"q":"sum","r":"mean"})`} maxHeight="80px" />
+            <ul className="text-[11px] mt-2 space-y-0.5 text-muted-foreground">
+              <li>• Single-letter variable names (r, q, p)</li>
+              <li>• Abbreviated column names (rev, q, p)</li>
+              <li>• No whitespace around operators</li>
+              <li>• Dict-style agg is less readable</li>
+            </ul>
           </div>
-          <div className="rounded-lg border border-ai-green/30 bg-ai-green/5 p-4">
-            <h4 className="font-semibold text-xs mb-1.5 text-ai-green">After refactoring</h4>
+          <div className="rounded-lg border-2 border-ai-green/40 bg-ai-green/5 p-4">
+            <h4 className="font-semibold text-xs mb-1.5 text-ai-green flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5" /> After refactoring</h4>
             <CodeBlock language="python" code={`high_value = df[df["revenue"] > 100]\nsummary = (high_value\n    .groupby("product")\n    .agg(total_qty=("quantity", "sum"),\n         avg_rev=("revenue", "mean"))\n    .reset_index())`} maxHeight="120px" />
+            <ul className="text-[11px] mt-2 space-y-0.5 text-muted-foreground">
+              <li>• Descriptive names (high_value, summary)</li>
+              <li>• Full column names (revenue, product, quantity)</li>
+              <li>• Method chaining with line breaks</li>
+              <li>• Named aggregations (clearer output columns)</li>
+              <li>• reset_index() returns a clean DataFrame</li>
+            </ul>
           </div>
         </div>
         <Callout type="tip" title="Refactoring checklist">
-          Behavior unchanged (same outputs) · More readable (descriptive names, spacing) · More maintainable (smaller functions, less nesting) · Equal or better performance.
+          Behavior unchanged (same outputs) · More readable (descriptive names, spacing) · More maintainable (smaller functions, less nesting) · Equal or better performance. Run tests before AND after to confirm behavior is preserved.
         </Callout>
       </LessonSection>
 

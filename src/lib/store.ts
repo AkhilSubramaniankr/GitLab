@@ -43,7 +43,7 @@ export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
       currentView: 'dashboard',
-      sidebarOpen: true,
+      sidebarOpen: false,  // default closed on mobile; AppShell opens on desktop via effect
       searchQuery: '',
       progress: emptyProgress,
       setView: (view) => set({ currentView: view }),

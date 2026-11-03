@@ -10,6 +10,7 @@ import { CodeBlock } from '@/components/learn/code-block'
 import { Quiz } from '@/components/learn/quiz'
 import { NLToPythonExplorer } from '@/components/labs/nl-to-python-explorer'
 import { CopilotChatSimulator } from '@/components/labs/copilot-chat-simulator'
+import { CodeCompletionPlayground } from '@/components/labs/code-completion-playground'
 
 const day = CURRICULUM[2]
 
@@ -39,6 +40,11 @@ result = (df.groupby("product")["revenue"]
         <Callout type="tip" title="Function-name driven generation">
           A well-named function signature alone is often enough. Typing <code className="bg-muted px-1 rounded text-xs">{'def top_5_products_by_revenue(df: pd.DataFrame) -> pd.Series:'}</code> and pressing Enter usually produces a correct body.
         </Callout>
+
+        <div className="mt-4">
+          <h3 className="font-semibold text-sm mb-2">Interactive: Code Completion Playground</h3>
+          <CodeCompletionPlayground />
+        </div>
       </LessonSection>
 
       <LessonSection id="d3-nl" title="2. Natural Language → Python Explorer">

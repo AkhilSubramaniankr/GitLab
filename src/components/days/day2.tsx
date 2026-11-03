@@ -10,6 +10,7 @@ import { CodeBlock } from '@/components/learn/code-block'
 import { Quiz } from '@/components/learn/quiz'
 import { VSCodeInterfaceExplorer } from '@/components/labs/vscode-interface-explorer'
 import { CopilotChatSimulator } from '@/components/labs/copilot-chat-simulator'
+import { TraditionalVsCopilotComparison } from '@/components/labs/partial-features'
 
 const day = CURRICULUM[1]
 
@@ -40,6 +41,12 @@ export function Day2View() {
         <Callout type="info" title="Traditional vs AI-Assisted">
           Traditional: think → search docs → type → debug → repeat. AI-assisted: describe intent → review suggestion → refine. You still debug and validate, but the typing and search steps shrink dramatically.
         </Callout>
+
+        <div className="mt-4">
+          <h3 className="font-semibold text-sm mb-2">Interactive: Traditional vs Copilot — Same Task, Side by Side</h3>
+          <p className="text-xs text-muted-foreground mb-3">Click through 5 steps of the same task done two ways. See the time difference add up.</p>
+          <TraditionalVsCopilotComparison />
+        </div>
       </LessonSection>
 
       <LessonSection id="d2-what" title="2. What GitHub Copilot Does">

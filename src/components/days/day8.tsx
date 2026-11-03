@@ -10,6 +10,7 @@ import { CodeBlock } from '@/components/learn/code-block'
 import { Quiz } from '@/components/learn/quiz'
 import { PandasOperationExplorer } from '@/components/labs/pandas-explorer'
 import { VisualizationPlayground } from '@/components/labs/visualization-playground'
+import { EDALaboratory } from '@/components/labs/eda-laboratory'
 import { CopilotChatSimulator } from '@/components/labs/copilot-chat-simulator'
 import { retailSales, dirtyRetailSales } from '@/lib/data/datasets'
 
@@ -81,6 +82,12 @@ print(df.duplicated().sum()) # duplicate row count`} maxHeight="280px" />
             interview: { q: 'What are the key steps in EDA for a tabular dataset?', a: '1) Inspect: shape, dtypes, head. 2) Missing values: count per column, decide imputation strategy. 3) Duplicates: count and drop. 4) Descriptive statistics: mean, median, std, min, max, quartiles. 5) Distributions: histograms for each numeric column. 6) Categorical value counts. 7) Correlation matrix + scatter for relationships. 8) Outliers via box plots and IQR. 9) Document findings.' },
           }}
         />
+
+        <div className="mt-4">
+          <h3 className="font-semibold text-sm mb-2">Interactive: EDA Laboratory — Run Full Analysis</h3>
+          <p className="text-xs text-muted-foreground mb-3">One click runs the complete EDA workflow: quality checks, descriptive stats, categorical distributions, correlation heatmap, and outlier detection. Switch between the clean and dirty dataset to compare.</p>
+          <EDALaboratory />
+        </div>
       </LessonSection>
 
       <LessonSection id="d8-stats" title="5. Descriptive Statistics & Correlation">

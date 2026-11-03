@@ -230,6 +230,7 @@ export function PandasOperationExplorer() {
       <div className="px-4 py-3 border-b bg-muted/40 flex items-center justify-between gap-2 flex-wrap">
         <h4 className="font-semibold text-sm flex items-center gap-2">
           <Sparkles className="w-4 h-4 text-ai-purple" /> Pandas Operation Explorer
+          <span className="text-[9px] px-1.5 py-0.5 rounded bg-ai-orange/15 text-ai-orange font-semibold uppercase">Synthetic data</span>
         </h4>
         <div className="flex gap-1">
           <Button size="sm" variant={dataset === 'clean' ? 'default' : 'outline'} onClick={() => { setDataset('clean'); run(op, 'clean') }}>Clean dataset</Button>

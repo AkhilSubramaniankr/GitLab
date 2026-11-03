@@ -9,6 +9,7 @@ import { ConceptExplorer } from '@/components/learn/concept-explorer'
 import { CodeBlock } from '@/components/learn/code-block'
 import { Quiz } from '@/components/learn/quiz'
 import { SQLLab } from '@/components/labs/sql-lab'
+import { SQLQueryBuilder, SQLDebuggingChallenge, SQLResultVisualizer } from '@/components/labs/sql-extras'
 import { CopilotChatSimulator } from '@/components/labs/copilot-chat-simulator'
 import { sqlTables, SAMPLE_SQL_QUERIES } from '@/lib/data/datasets'
 
@@ -111,6 +112,24 @@ export function Day7View() {
           <li>🚫 <strong>Watch for cartesian products</strong> — missing ON clause = N×M rows.</li>
           <li>🤖 <strong>Ask Copilot:</strong> "Rewrite this query for readability and suggest indexes that would help."</li>
         </ul>
+
+        <div className="mt-4">
+          <h3 className="font-semibold text-sm mb-2">Interactive: SQL Query Builder</h3>
+          <p className="text-xs text-muted-foreground mb-3">Compose a query with dropdowns. The generated SQL appears below — copy it into the SQL Execution Lab to run.</p>
+          <SQLQueryBuilder tables={sqlTables} />
+        </div>
+
+        <div className="mt-4">
+          <h3 className="font-semibold text-sm mb-2">Interactive: SQL Debugging Challenge</h3>
+          <p className="text-xs text-muted-foreground mb-3">Each exercise presents a buggy SQL query and 3 candidate fixes. Pick the correct one.</p>
+          <SQLDebuggingChallenge />
+        </div>
+
+        <div className="mt-4">
+          <h3 className="font-semibold text-sm mb-2">Interactive: SQL Result Visualizer</h3>
+          <p className="text-xs text-muted-foreground mb-3">Business question → SQL query → result table → mini chart → validation → business insight.</p>
+          <SQLResultVisualizer tables={sqlTables} />
+        </div>
       </LessonSection>
 
       <LessonSection id="d7-python-sql" title="7. Python + SQL Integration">

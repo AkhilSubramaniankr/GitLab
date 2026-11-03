@@ -9,6 +9,7 @@ import { ConceptExplorer } from '@/components/learn/concept-explorer'
 import { CodeBlock } from '@/components/learn/code-block'
 import { Quiz } from '@/components/learn/quiz'
 import { PromptBuilder } from '@/components/labs/prompt-builder'
+import { PromptImprovementLab } from '@/components/labs/prompt-improvement-lab'
 import { CopilotChatSimulator } from '@/components/labs/copilot-chat-simulator'
 
 const day = CURRICULUM[3]
@@ -102,7 +103,7 @@ export function Day4View() {
         </div>
       </LessonSection>
 
-      <LessonSection id="d4-iterative" title="5. Iterative Prompt Refinement">
+      <LessonSection id="d4-iterative" title="5. Iterative Prompt Refinement & Improvement Lab">
         <p className="text-sm leading-relaxed mb-3">Prompt engineering is iterative. Start simple, observe the output, refine:</p>
         <ol className="text-sm space-y-1.5 leading-relaxed list-decimal pl-5">
           <li>Write the simplest version of the prompt.</li>
@@ -114,6 +115,12 @@ export function Day4View() {
         <Callout type="tip" title="Ask Copilot to critique its own output">
           After generating code, ask: "What edge cases does this code not handle?" or "What assumptions am I making?" Copilot often surfaces issues you missed.
         </Callout>
+
+        <div className="mt-4">
+          <h3 className="font-semibold text-sm mb-2">Interactive: Prompt Improvement Laboratory</h3>
+          <p className="text-xs text-muted-foreground mb-3">Write a prompt and get an instant rubric score across 6 criteria. Try the sample prompts to see how scoring changes as the prompt improves.</p>
+          <PromptImprovementLab />
+        </div>
       </LessonSection>
 
       <LessonSection id="d4-context" title="6. Context Awareness — File & Workspace Context">

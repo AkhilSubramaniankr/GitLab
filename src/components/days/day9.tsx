@@ -9,6 +9,8 @@ import { ConceptExplorer } from '@/components/learn/concept-explorer'
 import { CodeBlock } from '@/components/learn/code-block'
 import { Quiz } from '@/components/learn/quiz'
 import { AgentLoopVisualizer } from '@/components/labs/agent-loop-visualizer'
+import { MultiFileProjectSimulator } from '@/components/labs/multi-file-simulator'
+import { MCPConceptExplorer, TerminalAssistanceDemo } from '@/components/labs/partial-features'
 import { CopilotChatSimulator } from '@/components/labs/copilot-chat-simulator'
 
 const day = CURRICULUM[8]
@@ -91,12 +93,9 @@ export function Day9View() {
 
       <LessonSection id="d9-multifile" title="4. Multi-File Project Awareness">
         <p className="text-sm leading-relaxed mb-3">
-          Agents can reason about an entire project — not just the file you have open. A typical analytics project structure:
+          Agents can reason about an entire project — not just the file you have open. The simulator below shows how an agent decides which files to touch for a given task.
         </p>
-        <CodeBlock language="bash" title="Multi-file project the agent sees" code={`sales-analysis/\n├── main.py              ← entry point\n├── cleaning.py          ← data cleaning functions\n├── analysis.py          ← aggregations & metrics\n├── visualization.py     ← chart helpers\n├── tests/\n│   └── test_cleaning.py ← pytest tests\n├── requirements.txt     ← pinned deps\n└── README.md            ← project docs`} maxHeight="220px" />
-        <p className="text-sm leading-relaxed mt-2">
-          When you ask the agent to "add a profit_margin column", it knows to edit <code className="bg-muted px-1 rounded text-xs">cleaning.py</code> (where columns are added), update <code className="bg-muted px-1 rounded text-xs">analysis.py</code> (if profit_margin is used downstream), and add tests in <code className="bg-muted px-1 rounded text-xs">test_cleaning.py</code> — all in one task.
-        </p>
+        <MultiFileProjectSimulator />
       </LessonSection>
 
       <LessonSection id="d9-tools" title="5. Agent Tools, Permissions & Human Approval">
@@ -129,7 +128,11 @@ export function Day9View() {
         <p className="text-sm leading-relaxed mb-3">
           Copilot CLI / terminal assistance suggests shell commands and explains errors. Always review before running — agents can run destructive commands.
         </p>
-        <CodeBlock language="bash" title="Example terminal assistance (simulated)" code={`$ ?? git undo last commit\n\nSuggested command:\n  git reset --soft HEAD~1\n\nExplanation:\n  Removes the last commit but keeps the changes staged.\n  Use --hard instead to discard the changes (DESTRUCTIVE).\n\nApprove? [y/n]`} maxHeight="160px" />
+        <div className="mt-3">
+          <h3 className="font-semibold text-sm mb-2">Interactive: Terminal Assistance Demo</h3>
+          <p className="text-xs text-muted-foreground mb-3">Click through 5 prompts. Approve or reject each suggested command. Destructive commands are flagged.</p>
+          <TerminalAssistanceDemo />
+        </div>
       </LessonSection>
 
       <LessonSection id="d9-customization" title="7. Custom Instructions, Prompt Files, Custom Agents & MCP">
@@ -154,6 +157,12 @@ export function Day9View() {
         <Callout type="warning" title="Availability varies">
         Agent mode, custom agents, and MCP support depend on your Copilot plan, editor version, and organization policy. Check the official docs at docs.github.com/copilot for current availability.
         </Callout>
+
+        <div className="mt-4">
+          <h3 className="font-semibold text-sm mb-2">Interactive: MCP Concept Explorer</h3>
+          <p className="text-xs text-muted-foreground mb-3">Click through the 5 stages of how an agent uses MCP to query an external database.</p>
+          <MCPConceptExplorer />
+        </div>
       </LessonSection>
 
       <LessonSection id="d9-custom-instructions-lab" title="8. Custom Instructions Builder — Interactive">

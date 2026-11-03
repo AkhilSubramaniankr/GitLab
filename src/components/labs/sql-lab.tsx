@@ -69,7 +69,20 @@ function evalCondition(row: Row, expr: string): boolean {
     col = col.trim()
     operator = operator.toUpperCase()
     val = val.trim().replace(/^'|'$/g, '')
-    const cell = row[col] ?? row[col.split('.')[1]]
+    // Resolve cell: try exact key, then alias.col, then unqualified col
+    let cell = row[col]
+    if (cell === undefined && col.includes('.')) {
+      cell = row[col] ?? row[col.split('.')[1]]
+      // also try any qualified key ending with .colName
+      if (cell === undefined) {
+        const colName = col.split('.')[1]
+        for (const rk of Object.keys(row)) {
+          if (rk.endsWith('.' + colName)) { cell = row[rk]; break }
+        }
+      }
+    } else if (cell === undefined) {
+      // unqualified — try as-is (already done); leave undefined
+    }
     let cond = false
     if (operator === 'IS NULL') cond = cell == null
     else if (operator === 'IS NOT NULL') cond = cell != null
@@ -97,7 +110,8 @@ interface ParsedQuery {
   columns: string[]
   agg?: { fn: string; col: string; alias?: string }[]
   from: string
-  joins?: { type: string; table: string; on: string }[]
+  fromAlias?: string
+  joins?: { type: string; table: string; alias?: string; onLeft: string; onRight: string }[]
   where?: string
   groupBy?: string[]
   having?: string
@@ -105,24 +119,110 @@ interface ParsedQuery {
   limit?: number
 }
 
+// Split a clause string on top-level WHERE/GROUP BY/HAVING/ORDER BY/LIMIT
+// (case-insensitive, word-boundary aware) so we don't accidentally split on
+// those words inside column names or string literals.
+function splitClauses(rest: string): string[] {
+  const keywords = ['WHERE', 'GROUP\\s+BY', 'HAVING', 'ORDER\\s+BY', 'LIMIT']
+  const re = new RegExp(`\\s+(${keywords.join('|')})\\s+`, 'i')
+  // Walk the string and split only when the keyword is not inside a quote.
+  const parts: string[] = []
+  let buf = ''
+  let i = 0
+  let inStr: string | null = null
+  while (i < rest.length) {
+    const c = rest[i]
+    if (inStr) {
+      buf += c
+      if (c === inStr && rest[i - 1] !== '\\') inStr = null
+      i++
+      continue
+    }
+    if (c === "'" || c === '"' || c === '`') {
+      inStr = c
+      buf += c
+      i++
+      continue
+    }
+    // Try to match a keyword at this position
+    const remaining = rest.slice(i)
+    const m = re.exec(remaining)
+    if (m && m.index === 0) {
+      parts.push(buf)
+      parts.push(m[1].toUpperCase().replace(/\s+/g, ' '))
+      i += m[0].length
+      buf = ''
+      continue
+    }
+    buf += c
+    i++
+  }
+  parts.push(buf)
+  return parts
+}
+
+// Parse a "table alias" or "table AS alias" or "table" segment.
+// Returns { table, alias }.
+function parseTableRef(s: string): { table: string; alias?: string } {
+  const t = s.trim().replace(/;$/, '')
+  // Match: tablename [AS] alias  OR  tablename
+  const m = t.match(/^(\w+)(?:\s+(?:AS\s+)?(\w+))?$/i)
+  if (!m) return { table: t }
+  return { table: m[1], alias: m[2] }
+}
+
 function parseSelect(sql: string): ParsedQuery {
   const upper = sql.toUpperCase()
   if (!upper.startsWith('SELECT')) throw new Error('Only SELECT statements are supported.')
+  // Detect unsupported features early with a clear error
+  if (/\bOVER\s*\(/i.test(sql)) {
+    throw new Error('Window functions (OVER clause) are not supported in this lab. The lab supports SELECT, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT, JOIN, and aggregates (COUNT/SUM/AVG/MIN/MAX).')
+  }
+  if (/\bUNION\b/i.test(upper)) {
+    throw new Error('UNION is not supported in this lab.')
+  }
   const colEnd = upper.indexOf(' FROM ')
   if (colEnd < 0) throw new Error('Missing FROM clause.')
   const colPart = sql.slice(6, colEnd).trim()
   const rest = sql.slice(colEnd + 6).trim()
 
-  // Parse FROM/JOIN/WHERE/GROUP BY/HAVING/ORDER BY/LIMIT
-  const segments = rest.split(/\s+(WHERE|GROUP\s+BY|HAVING|ORDER\s+BY|LIMIT)\s+/i)
-  const from = segments[0].trim().replace(/;$/, '')
-  const q: ParsedQuery = { columns: [], from }
+  // Split into FROM ... [JOIN ...]* [WHERE ...] [GROUP BY ...] [HAVING ...] [ORDER BY ...] [LIMIT ...]
+  const segments = splitClauses(rest)
+  const fromPart = segments[0].trim()
+  const q: ParsedQuery = { columns: [], from: '' }
 
-  // Parse joins embedded in FROM
-  const joinMatch = from.match(/^(.+?)\s+(INNER|LEFT|RIGHT|FULL)?\s*JOIN\s+(\w+)\s+ON\s+(.+)$/i)
-  if (joinMatch) {
-    q.from = joinMatch[1].trim()
-    q.joins = [{ type: (joinMatch[2] || 'INNER').toUpperCase(), table: joinMatch[3], on: joinMatch[4] }]
+  // Parse FROM and any JOINs from the first segment.
+  // A FROM clause looks like: table [alias] [JOIN table [alias] ON cond [JOIN ...]]
+  // We tokenize on JOIN keywords (case-insensitive, word boundary).
+  const joinTokens = fromPart.split(/\s+(INNER\s+|LEFT\s+|RIGHT\s+|FULL\s+|OUTER\s+|CROSS\s+)?JOIN\s+/i)
+  // joinTokens[0] = base table clause; subsequent pairs are [type, table+on]
+  const baseRef = parseTableRef(joinTokens[0])
+  q.from = baseRef.table
+  q.fromAlias = baseRef.alias
+
+  if (joinTokens.length > 1) {
+    q.joins = []
+    for (let i = 1; i < joinTokens.length; i += 2) {
+      const joinTypeRaw = (joinTokens[i] || 'INNER').trim().toUpperCase().replace(/\s+/g, ' ')
+      const joinType = joinTypeRaw === 'OUTER' ? 'FULL OUTER' : (joinTypeRaw || 'INNER')
+      const rest2 = joinTokens[i + 1]
+      // rest2 = table [alias] ON condition
+      // Split on the ON keyword (case-insensitive, word boundary, not in quotes)
+      const onMatch = rest2.match(/^(.+?)\s+ON\s+(.+)$/i)
+      if (!onMatch) throw new Error(`JOIN missing ON clause: ${rest2}`)
+      const tableRef = parseTableRef(onMatch[1].trim())
+      const onCond = onMatch[2].trim()
+      // Parse ON "left = right" (only equality supported)
+      const onParts = onCond.split(/\s*=\s*/)
+      if (onParts.length !== 2) throw new Error(`Only simple equality JOIN ON conditions are supported. Got: ${onCond}`)
+      q.joins.push({
+        type: joinType,
+        table: tableRef.table,
+        alias: tableRef.alias,
+        onLeft: onParts[0].trim(),
+        onRight: onParts[1].trim(),
+      })
+    }
   }
 
   // Aggregates
@@ -150,31 +250,61 @@ function parseSelect(sql: string): ParsedQuery {
   return q
 }
 
+// Resolve a possibly-qualified column reference against a joined row.
+// "s.customer_id" → looks up "s.customer_id" first, then "customer_id".
+// Also handles unqualified "customer_id".
+function resolveCol(row: Row, col: string, aliasMap: Record<string, string>): any {
+  if (col in row) return row[col]
+  if (col.includes('.')) {
+    const [alias, colName] = col.split('.')
+    // Try "alias.colName" key (set during JOIN)
+    const qualified = `${alias}.${colName}`
+    if (qualified in row) return row[qualified]
+    // If alias maps to a table, the unqualified colName from that table may be present
+    // only if no other table has the same column name. Fall back to colName.
+    if (colName in row) return row[colName]
+  }
+  return undefined
+}
+
 function executeSelect(sql: string, tables: Record<string, Table>): { columns: string[]; rows: Row[] } {
   const q = parseSelect(sql)
   const base = tables[q.from]
   if (!base) throw new Error(`Table "${q.from}" not found.`)
 
-  let rows: Row[] = [...base.rows]
+  // Build alias map: alias → table name (for resolving qualified refs)
+  const aliasMap: Record<string, string> = {}
+  if (q.fromAlias) aliasMap[q.fromAlias] = q.from
+  q.joins?.forEach((j) => { if (j.alias) aliasMap[j.alias] = j.table })
+
+  let rows: Row[] = base.rows.map((r) => ({ ...r }))
 
   // JOIN
   if (q.joins) {
     for (const j of q.joins) {
       const right = tables[j.table]
       if (!right) throw new Error(`Table "${j.table}" not found.`)
-      const [lcol, rcol] = j.on.split(/\s*=\s*/)
-      const leftKey = lcol.split('.')[1] || lcol
-      const rightKey = rcol.split('.')[1] || rcol
       const joined: Row[] = []
       for (const lr of rows) {
         let matched = false
         for (const rr of right.rows) {
-          if (lr[leftKey] === rr[rightKey]) {
-            joined.push({ ...lr, ...Object.fromEntries(Object.entries(rr).map(([k, v]) => [`${j.table}.${k}`, v])) })
+          // Evaluate ON condition: left.col = right.col
+          const lv = resolveCol(lr, j.onLeft, aliasMap)
+          const rv = resolveCol(rr, j.onRight, aliasMap)
+          if (lv === rv && lv !== undefined) {
+            // Merge: keep left keys, add right keys qualified by alias and unqualified (if no collision)
+            const merged: Row = { ...lr }
+            for (const [k, v] of Object.entries(rr)) {
+              const qualifiedKey = `${j.alias || j.table}.${k}`
+              merged[qualifiedKey] = v
+              // Only set unqualified key if not already present (left wins)
+              if (!(k in merged)) merged[k] = v
+            }
+            joined.push(merged)
             matched = true
           }
         }
-        if (!matched && j.type === 'LEFT') joined.push(lr)
+        if (!matched && (j.type === 'LEFT' || j.type === 'LEFT OUTER')) joined.push(lr)
       }
       rows = joined
     }
@@ -189,7 +319,7 @@ function executeSelect(sql: string, tables: Record<string, Table>): { columns: s
     const groups = new Map<string, Row[]>()
     const keys = q.groupBy || []
     for (const r of rows) {
-      const k = keys.map((kk) => r[kk] ?? r[kk.split('.')[1]]).join('||')
+      const k = keys.map((kk) => resolveCol(r, kk, aliasMap)).join('||')
       if (!groups.has(k)) groups.set(k, [])
       groups.get(k)!.push(r)
     }
@@ -197,11 +327,13 @@ function executeSelect(sql: string, tables: Record<string, Table>): { columns: s
     for (const [k, group] of groups) {
       const row: Row = {}
       keys.forEach((kk, i) => {
-        const key = kk.split('.')[1] || kk
-        row[key] = k.split('||')[i]
+        // Strip alias prefix for output column name: "c.tier" → "tier"
+        const outKey = kk.includes('.') ? kk.split('.')[1] : kk
+        row[outKey] = k.split('||')[i]
       })
       q.agg?.forEach((a) => {
-        const vals = group.map((g) => g[a.col === '*' ? Object.keys(g)[0] : (a.col.split('.')[1] || a.col)]).filter((v) => v != null && v !== '')
+        const col = a.col === '*' ? '*' : a.col
+        const vals = group.map((g) => col === '*' ? Object.values(g)[0] : resolveCol(g, col, aliasMap)).filter((v) => v != null && v !== '')
         const alias = a.alias || `${a.fn.toLowerCase()}_${a.col}`.replace(/[^a-z_]/gi, '')
         if (a.fn === 'COUNT') row[alias] = vals.length
         else if (a.fn === 'SUM') row[alias] = vals.reduce((s, v) => s + Number(v), 0)
@@ -212,11 +344,11 @@ function executeSelect(sql: string, tables: Record<string, Table>): { columns: s
       out.push(row)
     }
     rows = out
-    outCols = [...(keys.map((k) => k.split('.')[1] || k)), ...(q.agg?.map((a) => a.alias || `${a.fn.toLowerCase()}_${a.col}`.replace(/[^a-z_]/gi, '')) || [])]
+    outCols = [...(keys.map((k) => k.includes('.') ? k.split('.')[1] : k)), ...(q.agg?.map((a) => a.alias || `${a.fn.toLowerCase()}_${a.col}`.replace(/[^a-z_]/gi, '')) || [])]
   } else if (q.columns[0] === '*') {
     outCols = base.columns.map((c) => c.name)
   } else {
-    outCols = q.columns.map((c) => c.split('.')[1] || c)
+    outCols = q.columns.map((c) => c.includes('.') ? c.split('.')[1] : c)
   }
 
   // HAVING
@@ -226,9 +358,11 @@ function executeSelect(sql: string, tables: Record<string, Table>): { columns: s
   if (q.orderBy) {
     rows.sort((a, b) => {
       for (const o of q.orderBy!) {
-        const av = a[o.col] ?? a[o.col.split('.')[1]]
-        const bv = b[o.col] ?? b[o.col.split('.')[1]]
+        const av = resolveCol(a, o.col, aliasMap)
+        const bv = resolveCol(b, o.col, aliasMap)
         if (av === bv) continue
+        if (av == null) return 1
+        if (bv == null) return -1
         const cmp = av > bv ? 1 : -1
         return o.dir === 'DESC' ? -cmp : cmp
       }
@@ -243,7 +377,16 @@ function executeSelect(sql: string, tables: Record<string, Table>): { columns: s
   if (outCols && outCols.length > 0 && q.columns[0] !== '*') {
     rows = rows.map((r) => {
       const proj: Row = {}
-      outCols.forEach((c) => proj[c] = r[c])
+      outCols.forEach((c) => {
+        // Try direct key, then resolve qualified
+        if (c in r) proj[c] = r[c]
+        else {
+          // Find any qualified key that ends with .c
+          for (const rk of Object.keys(r)) {
+            if (rk.endsWith('.' + c)) { proj[c] = r[rk]; break }
+          }
+        }
+      })
       return proj
     })
   }
@@ -285,6 +428,7 @@ export function SQLLab({ tables, initialQuery, sampleQueries = [], title = 'SQL 
         <Database className="w-4 h-4 text-ai-cyan" />
         <h4 className="font-semibold text-sm">{title}</h4>
         <span className="ml-auto text-[10px] px-2 py-0.5 rounded bg-ai-green/15 text-ai-green font-semibold uppercase">Read-only · Live</span>
+        <span className="text-[10px] px-2 py-0.5 rounded bg-ai-orange/15 text-ai-orange font-semibold uppercase">Synthetic data</span>
       </div>
 
       <div className="grid lg:grid-cols-[220px_1fr] divide-x divide-border">
