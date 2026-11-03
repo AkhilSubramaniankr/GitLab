@@ -1,0 +1,1326 @@
+# MASTER PROMPT: BUILD AN INTERACTIVE GITHUB COPILOT FOR DATA ANALYTICS LEARNING PLATFORM
+
+## ROLE
+
+Act as an expert AI/ML Engineer, Data Analyst, Data Science Educator, Git & GitHub Specialist, GitHub Copilot Trainer, Full-Stack Developer, UI/UX Designer, and Interactive Educational Platform Architect.
+
+Your responsibility is to design and develop a complete, professional, modern, highly interactive educational website dedicated to:
+
+# GitHub Copilot for Data Analytics
+
+**Course Duration:** 10 Days / 20 Hours  
+**Daily Duration:** 2 Hours  
+**Level:** Beginner to Intermediate  
+**Target Audience:** Data Analytics students, aspiring Data Analysts, Python learners, SQL learners, Business Analysts, and professionals interested in AI-assisted analytics.
+
+The platform must function as a combination of:
+
+- Interactive educational textbook
+- GitHub and Git learning laboratory
+- GitHub Copilot feature explorer
+- AI-assisted coding playground
+- Data Analytics laboratory
+- SQL query laboratory
+- Prompt Engineering laboratory
+- Interactive visualization platform
+- Agentic AI learning environment
+- Real-world project development workspace
+
+The primary objective is to help students understand **WHAT each concept is, WHY it is important, WHEN it should be used, HOW it works, and HOW to apply it practically in Data Analytics.**
+
+Do not build a static informational website.
+
+Build a genuinely interactive learning platform where students learn by reading, exploring, modifying inputs, executing supported examples, observing results, solving problems, and validating their understanding.
+
+---
+
+# 1. CORE DEVELOPMENT REQUIREMENTS
+
+## 1.1 Preserve the Best Features of the Original Interactive Platform
+
+Retain and adapt the following design and teaching concepts from the original Prompt Engineering website specification:
+
+- Modern professional interface
+- Interactive concept explanations
+- Visual workflows and diagrams
+- Before-and-after comparisons
+- Interactive learning cards
+- Step-by-step demonstrations
+- Beginner-friendly technical explanations
+- Practical examples
+- Prompt playgrounds
+- Scenario-based exercises
+- Interactive quizzes
+- Instant feedback
+- Code examples
+- Data Analytics use cases
+- Data-flow visualizations
+- Business scenarios
+- Interactive terminology explanations
+- Learning progress tracking
+- Responsive layout
+- Professional design system
+
+Replace the prompt-engineering-only content, navigation, terminology, and exercises with the complete GitHub Copilot for Data Analytics curriculum.
+
+Prompt engineering must remain as one important module, not the entire website.
+
+## 1.2 Educational Structure
+
+For EVERY topic and subtopic, provide:
+
+1. What is it?
+2. Why is it used?
+3. When should it be used?
+4. How does it work?
+5. Simple beginner-friendly explanation
+6. Technical explanation
+7. Real-world analogy
+8. Data Analytics application
+9. Syntax or workflow where applicable
+10. Step-by-step example
+11. Interactive demonstration
+12. Practical hands-on exercise
+13. Common mistakes
+14. Best practices
+15. Limitations
+16. Interview question
+17. Industry application
+18. Knowledge-check quiz
+
+Do not create shallow explanations.
+
+Do not merely display topic headings and short definitions.
+
+Each topic must have meaningful instructional content and at least one working interaction appropriate to the concept.
+
+Use progressive disclosure to prevent information overload.
+
+---
+
+# 2. COMPLETE COURSE STRUCTURE
+
+The platform must contain the following 10 learning modules.
+
+All topics and subtopics listed below are mandatory.
+
+## DAY 1 — GIT & GITHUB FUNDAMENTALS
+
+**Duration: 2 Hours**
+
+### Topics
+
+1. Introduction to Version Control
+2. What is Git?
+3. What is GitHub?
+4. Git vs GitHub
+5. Why Data Analysts need Git and GitHub
+6. Installing and configuring Git
+7. GitHub account and repository fundamentals
+8. Local vs Remote Repositories
+9. Repository creation
+10. Public vs Private Repositories
+11. Git working directory, staging area, and repository
+12. Basic Git commands
+   - git init
+   - git status
+   - git add
+   - git commit
+   - git log
+   - git remote
+   - git push
+   - git pull
+   - git clone
+13. Connecting Git with GitHub
+14. GitHub integration with VS Code
+15. Uploading a Python Data Analytics project
+16. Introduction to .gitignore
+17. Protecting sensitive files and credentials
+
+### Interactive Features
+
+**Git Workflow Simulator**
+
+Visualize:
+
+Working Directory → Staging Area → Local Repository → Remote Repository
+
+Allow students to:
+
+- Create sample files
+- Modify files
+- Stage files
+- Commit changes
+- Simulate pushing to GitHub
+- View repository history
+- Reset the simulated workflow
+
+**Git Command Explorer**
+
+Selecting a Git command must display:
+
+- Purpose
+- Syntax
+- Example
+- Expected output
+- When to use
+- Common errors
+
+**Repository Structure Explorer**
+
+Display an interactive Python Data Analytics project folder structure.
+
+### Practical Exercise
+
+Create a GitHub repository for a Pandas-based sales analysis project.
+
+---
+
+## DAY 2 — INTRODUCTION TO GITHUB COPILOT
+
+**Duration: 2 Hours**
+
+### Topics
+
+1. Evolution of Software Development
+2. Traditional Coding vs AI-Assisted Coding
+3. Introduction to GitHub Copilot
+4. What GitHub Copilot does
+5. Conceptual foundations of AI code assistance
+6. High-level Copilot architecture
+7. Benefits and limitations
+8. GitHub Copilot plans and access requirements
+9. Installing GitHub Copilot in VS Code
+10. Authentication and configuration
+11. Exploring the Copilot interface
+12. Copilot Chat
+13. Inline Suggestions
+14. Inline Editing
+15. Smart Actions
+16. Context and workspace awareness
+17. Accepting and rejecting suggestions
+18. Responsible AI-assisted development
+
+### Interactive Features
+
+**Traditional Coding vs Copilot Comparison**
+
+Display two coding workflows side by side.
+
+**Copilot Interface Explorer**
+
+Create a clearly labeled educational simulation of VS Code showing:
+
+- Editor
+- Chat panel
+- Inline suggestions
+- Terminal
+- File explorer
+- Source control panel
+
+Clicking an interface element should explain its purpose and demonstrate a realistic interaction.
+
+**Code Suggestion Simulator**
+
+Allow students to type a Python comment and observe a sample code suggestion.
+
+Explain how suggestions should be reviewed before acceptance.
+
+### Practical Exercise
+
+Use Copilot to assist with loading and inspecting a CSV dataset in Python.
+
+---
+
+## DAY 3 — CODE GENERATION, INLINE SUGGESTIONS & COPILOT CHAT
+
+**Duration: 2 Hours**
+
+### Topics
+
+1. Basic Code Completion
+2. Code Generation from Natural Language
+3. Inline Suggestions
+4. Inline Chat and Editing
+5. Deep Dive into Copilot Chat
+6. Asking Questions About Code
+7. Explaining Existing Python Code
+8. Generating Python Functions
+9. Modifying Existing Code
+10. Smart Actions
+11. Code Conversion
+12. Language Translation
+13. Understanding AI-generated code
+14. Reviewing generated suggestions
+15. Common code-generation errors
+
+### Interactive Features
+
+**Code Completion Playground**
+
+Provide incomplete Python programs.
+
+Students select or enter the next instruction and observe code completion.
+
+**Natural Language to Python Explorer**
+
+Example:
+
+"Create a Python function to calculate total revenue for each product."
+
+Display:
+
+Natural Language → Generated Python Code → Explanation → Output → Validation
+
+**Copilot Chat Simulator**
+
+Provide predefined tasks:
+
+- Explain code
+- Generate code
+- Fix code
+- Improve code
+- Add comments
+- Convert code
+
+Allow students to modify instructions and observe corresponding changes.
+
+**Code Conversion Lab**
+
+Examples:
+
+- Python loop to list comprehension
+- Basic Python operations to Pandas operations
+- Pandas aggregation to equivalent SQL aggregation
+
+Explain differences in behavior and limitations.
+
+### Practical Exercise
+
+Generate, explain, and validate reusable Python functions for retail sales analysis.
+
+---
+
+## DAY 4 — PROMPT ENGINEERING & CONTEXT-AWARE DEVELOPMENT
+
+**Duration: 2 Hours**
+
+### Topics
+
+1. What is Prompt Engineering?
+2. Why prompts matter in GitHub Copilot
+3. Good prompts vs Poor prompts
+4. Prompt structure
+5. Task, Role, Input, Constraints, Knowledge
+6. Effective Prompting Techniques
+7. Zero-Shot Prompting
+8. Few-Shot Prompting
+9. Role Prompting
+10. Structured Prompting
+11. Iterative Prompt Refinement
+12. Context Awareness
+13. File and Workspace Context
+14. Prompting for Python
+15. Prompting for Pandas
+16. Prompting for SQL
+17. Prompting for Visualization
+18. Prompt Validation
+19. Handling hallucinations
+20. Prompt Engineering Best Practices
+
+### Interactive Features
+
+**TRICK Prompt Framework Explorer**
+
+T — Task  
+R — Role  
+I — Input  
+C — Condition  
+K — Knowledge
+
+Explain every component interactively.
+
+**Interactive Prompt Builder**
+
+Provide editable fields for:
+
+- Task
+- Role
+- Input
+- Conditions
+- Knowledge
+- Expected output
+
+Generate a complete structured prompt automatically.
+
+**Before vs After Prompt Comparison**
+
+Poor Prompt:
+
+"Clean this data."
+
+Improved Prompt:
+
+"Using Python Pandas, inspect the provided sales dataset for missing values, duplicate records, and inconsistent categories. Generate a cleaning function, preserve the original dataset, explain each transformation, and include validation checks."
+
+**Prompt Improvement Laboratory**
+
+Allow students to improve vague prompts and receive feedback based on a transparent rubric.
+
+**Context Awareness Simulator**
+
+Demonstrate how relevant file context, schemas, and business rules change a generated solution.
+
+### Practical Exercise
+
+Create optimized prompts for Pandas data cleaning, SQL queries, and Matplotlib visualization.
+
+---
+
+## DAY 5 — DEBUGGING, TESTING, REFACTORING & DOCUMENTATION
+
+**Duration: 2 Hours**
+
+### Topics
+
+1. Debugging with GitHub Copilot
+2. Syntax Errors
+3. Runtime Errors
+4. Logical Errors
+5. Pandas Error Resolution
+6. Understanding Error Messages
+7. Code Explanation
+8. Code Refactoring
+9. Code Optimization
+10. Code Readability
+11. Generating Unit Tests
+12. Understanding Assertions
+13. Test Cases and Edge Cases
+14. Validating AI-generated Tests
+15. Generating Docstrings
+16. Documentation Generation
+17. README Generation
+18. Introduction to API Specification Generation
+19. Code Quality Best Practices
+
+### Interactive Features
+
+**Python Debugging Lab**
+
+Provide deliberately incorrect Python/Pandas programs.
+
+Students must:
+
+- Identify the error
+- Explain its cause
+- Select or propose a fix
+- Run supported test cases
+- Compare expected and actual results
+
+**Before vs After Refactoring**
+
+Display original and improved code with synchronized explanations.
+
+**Unit Test Generator Simulator**
+
+Show:
+
+Python Function → Generated Tests → Test Execution → Results
+
+**Documentation Generator**
+
+Allow students to select a function and generate sample documentation.
+
+### Practical Exercise
+
+Debug and refactor a sales analysis script and create tests for its calculations.
+
+---
+
+## DAY 6 — GITHUB COLLABORATION, CODE REVIEW & VERSION CONTROL
+
+**Duration: 2 Hours**
+
+### Topics
+
+1. Git Branches
+2. Creating and Switching Branches
+3. Branching Workflows
+4. Merging Branches
+5. Merge Conflicts
+6. Pull Requests
+7. Pull Request Reviews
+8. Version Control Integration
+9. Copilot-Assisted Code Review
+10. Generating Commit Messages
+11. Reviewing Changes
+12. README Documentation
+13. Collaboration Best Practices
+14. GitHub Workflow for Data Analytics Projects
+
+### Interactive Features
+
+**Branching and Merging Simulator**
+
+Display interactive branch histories.
+
+Students should create branches, commit changes, and merge branches.
+
+**Merge Conflict Resolution Lab**
+
+Provide conflicting edits and let students choose a resolution.
+
+**Pull Request Simulator**
+
+Show:
+
+Feature Branch → Pull Request → Code Review → Approval → Merge
+
+**AI Code Review Exercise**
+
+Provide a Pandas script containing performance, correctness, and readability issues.
+
+Students identify the issues and compare them with simulated Copilot suggestions.
+
+### Practical Exercise
+
+Create a feature branch, improve an analytics script, and complete a simulated or real pull request.
+
+---
+
+## DAY 7 — AI-ASSISTED SQL & DATABASE ANALYTICS
+
+**Duration: 2 Hours**
+
+### Topics
+
+1. GitHub Copilot for SQL
+2. Natural Language to SQL
+3. SELECT Queries
+4. WHERE Conditions
+5. ORDER BY
+6. GROUP BY
+7. Aggregate Functions
+8. SQL Joins
+9. Subqueries
+10. Common Table Expressions
+11. Introduction to Window Functions
+12. SQL Query Explanation
+13. SQL Debugging
+14. Query Optimization
+15. Database Schema Awareness
+16. Python and SQL Integration
+17. SQL Result Validation
+18. SQL Best Practices
+
+### Interactive Features
+
+**Natural Language to SQL Playground**
+
+Example:
+
+"Find the top five products by total revenue."
+
+Display the corresponding SQL query using a supplied schema.
+
+**Interactive SQL Query Builder**
+
+Students select:
+
+- Table
+- Columns
+- Filters
+- Aggregations
+- Grouping
+- Sorting
+
+The platform generates a SQL query.
+
+**SQL Execution Lab**
+
+Use a safe local sample database or browser-compatible SQL execution engine.
+
+Students must be able to execute supported read-only queries against sample data.
+
+**SQL Debugging Challenge**
+
+Provide incorrect SQL and ask students to fix it.
+
+**SQL Result Visualizer**
+
+Show:
+
+Business Question → SQL Query → Result Table → Validation → Business Insight
+
+### Practical Exercise
+
+Analyze retail sales using SQL queries and explain the findings.
+
+---
+
+## DAY 8 — AI-ASSISTED DATA ANALYTICS & VISUALIZATION
+
+**Duration: 2 Hours**
+
+### Topics
+
+1. Copilot for Python Data Analytics
+2. Pandas Code Generation
+3. NumPy Operations
+4. Loading CSV Datasets
+5. Dataset Inspection
+6. Missing Value Detection
+7. Duplicate Detection
+8. Data Cleaning
+9. Data Transformation
+10. Filtering and Grouping
+11. Aggregation
+12. Exploratory Data Analysis
+13. Descriptive Statistics
+14. Correlation Analysis
+15. Outlier Detection
+16. Matplotlib Visualization
+17. Seaborn Visualization
+18. Chart Selection
+19. Chart Customization
+20. Data Interpretation
+21. Validation of AI-generated Analytics
+
+### Interactive Features
+
+**Data Cleaning Laboratory**
+
+Provide a sample dataset containing missing values, duplicates, and inconsistent categories.
+
+Students apply transformations and observe changes.
+
+**Pandas Operation Explorer**
+
+Students select operations such as:
+
+- Filter
+- Group
+- Aggregate
+- Sort
+- Merge
+- Fill missing values
+- Remove duplicates
+
+Display the corresponding Python code and expected output.
+
+**Interactive EDA Laboratory**
+
+Include:
+
+- Dataset summary
+- Descriptive statistics
+- Missing-value analysis
+- Distribution analysis
+- Correlation analysis
+- Outlier exploration
+
+**Visualization Playground**
+
+Include:
+
+- Line chart
+- Bar chart
+- Histogram
+- Box plot
+- Scatter plot
+- Pie chart
+- Heatmap
+
+Students select columns and chart types and observe valid chart outputs.
+
+**Copilot Code Generation Demonstration**
+
+Show the prompts that could generate equivalent Pandas and Matplotlib code.
+
+### Practical Exercise
+
+Perform exploratory analysis and visualization using a retail or HR attrition dataset.
+
+---
+
+## DAY 9 — COPILOT AGENT MODE, CLI, CUSTOMIZATION & MCP
+
+**Duration: 2 Hours**
+
+### Topics
+
+1. Introduction to Agentic AI
+2. AI Assistant vs AI Agent
+3. Agent Loop Fundamentals
+4. Ask Workflows
+5. Plan Workflows
+6. Agent Workflows
+7. Copilot Agent Mode
+8. Multi-file Editing
+9. Contextual Project Awareness
+10. Agent Tools and Permissions
+11. Human Approval
+12. CLI Integration
+13. Terminal Assistance
+14. Copilot Custom Instructions
+15. Reusable Prompt Files
+16. Custom Agents — Introduction
+17. Agent Skills — Introduction
+18. MCP Servers — Introduction
+19. Copilot Extensions and Integrations
+20. Agent Workflow Security
+21. Responsible Agent-Assisted Development
+
+### Interactive Features
+
+**Agent Loop Visualizer**
+
+Show:
+
+User Task → Planning → Tool Selection → Action → Observation → Validation → Completion
+
+Allow students to step through each stage.
+
+**Ask vs Plan vs Agent Comparison**
+
+Show the differences using the same Data Analytics problem.
+
+**Multi-file Project Simulator**
+
+Display:
+
+- main.py
+- data_cleaning.py
+- analysis.py
+- visualization.py
+- requirements.txt
+- README.md
+
+Students select a project-level task and observe which files may require changes.
+
+**Custom Instructions Builder**
+
+Students create reusable instructions for a Data Analytics project.
+
+**MCP Concept Explorer**
+
+Visually explain how agents can interact with external tools through MCP.
+
+**Terminal Assistance Demonstration**
+
+Show safe command suggestions with explanations and approval requirements.
+
+### Practical Exercise
+
+Use Copilot Agent Mode, where available, to plan and modify a multi-file Data Analytics project.
+
+For advanced capabilities unavailable in the student's environment, provide clearly labeled simulations and guided examples.
+
+---
+
+## DAY 10 — END-TO-END DATA ANALYTICS CAPSTONE PROJECT
+
+**Duration: 2 Hours**
+
+### Project Theme
+
+AI-Assisted Retail Sales Analytics
+
+Use a prepared dataset and starter project developed incrementally during earlier sessions.
+
+### Required Workflow
+
+1. Understand the business problem
+2. Inspect the dataset
+3. Define analytical objectives
+4. Create effective Copilot prompts
+5. Generate Python/Pandas code
+6. Clean and preprocess data
+7. Perform EDA
+8. Generate SQL queries where applicable
+9. Create visualizations
+10. Validate calculations and outputs
+11. Debug incorrect code
+12. Refactor the solution
+13. Generate documentation
+14. Commit changes using Git
+15. Upload the project to GitHub
+16. Present analytical findings
+
+### Interactive Capstone Workspace
+
+Create a guided project workflow with:
+
+- Project brief
+- Dataset preview
+- Task checklist
+- Prompt examples
+- Code editor or guided code panels
+- Data transformation previews
+- Visualization outputs
+- Validation checklist
+- GitHub publishing instructions
+- Final project review
+
+### Final Deliverables
+
+Students should produce:
+
+- Python analysis files
+- Cleaned dataset or reproducible cleaning script
+- SQL queries
+- Visualizations
+- Analytical summary
+- README documentation
+- GitHub repository
+
+---
+
+# 3. INTERACTIVE LEARNING SYSTEM
+
+The platform must not merely explain topics.
+
+It must allow students to interact with them.
+
+Create the following reusable learning components.
+
+## 3.1 Interactive Concept Explorer
+
+Every topic must include:
+
+- Beginner explanation
+- Technical explanation
+- Why it matters
+- When to use it
+- How it works
+- Example
+- Interactive demonstration
+- Common mistakes
+- Practical application
+
+## 3.2 Code Playground
+
+Provide a reusable code-learning environment with:
+
+- Syntax-highlighted editor
+- Editable examples
+- Copy code
+- Reset code
+- Run code when supported
+- Output panel
+- Error display
+- Expected vs actual output
+- Explanation panel
+
+Never display a fake successful execution.
+
+If executable Python is unavailable, use a real sandboxed execution solution or explicitly label the example as a simulation.
+
+## 3.3 Git and GitHub Simulator
+
+Support:
+
+- File creation
+- File modification
+- Staging
+- Commits
+- Branching
+- Merging
+- Conflict resolution
+- Pull requests
+- Repository history
+
+Distinguish simulated operations from real GitHub operations.
+
+## 3.4 Copilot Chat Simulator
+
+Provide task modes:
+
+- Explain
+- Generate
+- Fix
+- Refactor
+- Test
+- Document
+- Plan
+- Agent
+
+Use realistic Data Analytics scenarios.
+
+If no real Copilot integration exists, use clearly labeled predefined demonstrations or an optional authorized AI backend.
+
+Do not claim to be executing real GitHub Copilot when using a simulation.
+
+## 3.5 Prompt Engineering Playground
+
+Retain the original platform's interactive prompting concepts.
+
+Include:
+
+- Prompt builder
+- TRICK framework
+- Zero-shot prompting
+- Few-shot prompting
+- Role prompting
+- Structured prompting
+- Before/after comparison
+- Prompt improvement challenges
+- Prompt validation
+
+Focus examples specifically on GitHub Copilot for Python, Pandas, SQL, debugging, and visualization.
+
+## 3.6 SQL Laboratory
+
+Provide a sample relational database and allow students to:
+
+- Write queries
+- Execute read-only queries
+- View results
+- Debug errors
+- Compare outputs
+- Validate calculations
+
+## 3.7 Data Analytics Laboratory
+
+Include interactive:
+
+- Dataset preview
+- Data cleaning
+- Filtering
+- Grouping
+- Aggregation
+- EDA
+- Descriptive statistics
+- Correlation
+- Visualization
+- Business interpretation
+
+All calculated results must be derived from actual sample data, not fabricated outputs.
+
+## 3.8 Agent Workflow Simulator
+
+Allow students to explore:
+
+- Task planning
+- Tool selection
+- File modification
+- Tool permissions
+- Human approval
+- Result validation
+- Multi-file workflows
+
+## 3.9 Interactive Practice System
+
+Every module must include:
+
+- Multiple-choice questions
+- Code correction exercises
+- Scenario-based problems
+- Interactive challenges
+- Immediate feedback
+- Explanations for incorrect answers
+- Retry functionality
+
+Use beginner, intermediate, and advanced difficulty levels where appropriate.
+
+---
+
+# 4. USER INTERFACE & DESIGN SYSTEM
+
+## Visual Identity
+
+Create a professional educational platform inspired by modern developer tools and data analytics applications.
+
+### Colors
+
+Primary:
+
+- Deep Navy
+- White
+- Soft Gray
+
+Accent:
+
+- AI Blue
+- Purple
+- Cyan
+- Green
+- Orange
+- Red
+
+Use colors semantically:
+
+- Blue: Instructions and prompts
+- Purple: AI and Copilot
+- Cyan: Data and inputs
+- Green: Correct results
+- Orange: Warnings
+- Red: Errors
+
+Support light and dark themes.
+
+Avoid excessive gradients, animations, and decorative graphics.
+
+## Layout
+
+Create:
+
+- Responsive sidebar navigation
+- Top navigation bar
+- Course dashboard
+- Module cards
+- Lesson content area
+- Interactive lab panels
+- Progress indicators
+- Search functionality
+- Code editor panels
+- Output previews
+- Quiz panels
+
+## Homepage
+
+### Hero Title
+
+**GitHub Copilot for Data Analytics**
+
+### Subtitle
+
+Learn Git, GitHub, GitHub Copilot, prompt engineering, AI-assisted Python, SQL, debugging, data visualization, and modern agent workflows through interactive practical lessons.
+
+### Main Actions
+
+- Start Learning
+- Explore Modules
+- Open Interactive Labs
+- View Capstone Project
+
+### Hero Visualization
+
+Create an interactive workflow:
+
+Business Problem → Copilot Prompt → AI-Assisted Code → Data Analysis → Validation → Business Insight → GitHub Project
+
+Each stage should be clickable and explain its purpose.
+
+---
+
+# 5. MAIN NAVIGATION
+
+Create the following navigation structure:
+
+1. Dashboard
+2. Day 1 — Git & GitHub
+3. Day 2 — Copilot Fundamentals
+4. Day 3 — Code Generation & Chat
+5. Day 4 — Prompt Engineering
+6. Day 5 — Debugging & Testing
+7. Day 6 — GitHub Collaboration
+8. Day 7 — SQL Analytics
+9. Day 8 — Python Data Analytics
+10. Day 9 — Agents & Advanced Features
+11. Day 10 — Capstone Project
+12. Interactive Labs
+13. Practice & Quizzes
+14. Progress Dashboard
+15. Glossary
+
+All navigation items must open meaningful, working content.
+
+Do not create empty pages or placeholder sections.
+
+---
+
+# 6. LEARNING PROGRESSION
+
+Follow this instructional sequence:
+
+Beginner Explanation → Visual Understanding → Technical Understanding → Real-World Example → Interactive Demonstration → Hands-On Exercise → Validation → Quiz → Industry Application
+
+For each day, include:
+
+- Learning objectives
+- Prerequisites
+- Estimated duration
+- Topic list
+- Detailed lessons
+- Interactive activities
+- Practical assignment
+- Knowledge assessment
+- Summary
+- Next lesson navigation
+
+The 2-hour duration is the intended instructor-led session length, not a restriction on how much optional reference material the website may contain.
+
+Distinguish required classroom activities from optional advanced exploration.
+
+---
+
+# 7. DATASETS & PRACTICAL EXAMPLES
+
+Provide reusable sample datasets.
+
+## Retail Sales Dataset
+
+Columns may include:
+
+- order_id
+- order_date
+- customer_id
+- product
+- category
+- region
+- quantity
+- unit_price
+- revenue
+- cost
+- profit
+
+## HR Analytics Dataset
+
+Columns may include:
+
+- employee_id
+- department
+- job_role
+- age
+- monthly_income
+- years_at_company
+- overtime
+- attrition
+
+## Data Quality Dataset
+
+Include deliberately introduced issues:
+
+- Missing values
+- Duplicate records
+- Inconsistent categories
+- Incorrect date formats
+- Invalid numerical values
+
+Provide dataset documentation and clearly identify synthetic data.
+
+Use consistent sample datasets across multiple lessons so students can see how the skills connect.
+
+---
+
+# 8. ASSESSMENT & PROGRESS TRACKING
+
+Create a learning progress system.
+
+Track:
+
+- Completed lessons
+- Completed exercises
+- Quiz scores
+- Module completion
+- Capstone progress
+
+Include:
+
+- Module completion percentage
+- Overall course progress
+- Retry options
+- Correct answer explanations
+- Practical task completion
+
+Use local browser persistence if no backend is configured.
+
+Do not display fictitious student progress or completion statistics.
+
+---
+
+# 9. TECHNICAL IMPLEMENTATION
+
+If building a new web application, prefer:
+
+- React
+- TypeScript
+- Tailwind CSS
+- Accessible component primitives
+- Monaco Editor for code editing
+- Recharts or another suitable visualization library
+- Browser-compatible SQL engine for SQL exercises
+- Safe Python execution environment where practical
+
+If an existing project is supplied:
+
+1. Inspect its current architecture.
+2. Preserve compatible dependencies and conventions.
+3. Reuse existing components where appropriate.
+4. Avoid unnecessary rewrites.
+5. Maintain existing working functionality.
+6. Replace prompt-engineering-only navigation and content with the complete Copilot curriculum.
+7. Refactor reusable components rather than duplicating them.
+
+Do not add a backend unless required for genuine functionality.
+
+If real AI services are integrated:
+
+- Use supported, authorized APIs.
+- Protect credentials server-side.
+- Never expose API keys in frontend code.
+- Handle unavailable services gracefully.
+- Clearly distinguish real AI responses from demonstrations.
+
+For code execution, use appropriate sandboxing and resource limits.
+
+Do not execute arbitrary shell commands directly on the application server.
+
+---
+
+# 10. CONTENT QUALITY REQUIREMENTS
+
+All lessons must be:
+
+- Beginner-friendly
+- Technically accurate
+- Detailed
+- Structured
+- Practical
+- Interactive
+- Data Analytics-oriented
+- Suitable for classroom teaching
+- Relevant to real industry workflows
+
+Avoid:
+
+- One-line definitions
+- Generic filler explanations
+- Empty cards
+- Fake interactions
+- Nonfunctional buttons
+- Repeated content across modules
+- Excessive theoretical material without practice
+- Fabricated AI outputs presented as live responses
+- Incorrect SQL or Python examples
+- Unsupported GitHub Copilot feature claims
+
+For features that depend on the Copilot version, plan, editor, or organizational settings, explain availability conditions and use current official documentation when accessible.
+
+Do not treat product-specific names or features as universally available.
+
+---
+
+# 11. FINAL QUALITY ASSURANCE
+
+Before declaring the project complete, perform a comprehensive audit.
+
+## Curriculum Audit
+
+Verify:
+
+- All 10 modules exist.
+- Every required topic and subtopic is covered.
+- All 17 topic groups from the original Data Analytics syllabus are retained.
+- No major duplicate lessons exist.
+- Prompt engineering is included as a dedicated module.
+- GitHub fundamentals are taught before advanced collaboration.
+- Copilot fundamentals precede agent workflows.
+- SQL and Python analytics applications are practical.
+- The capstone connects the course concepts.
+
+## Interactive Feature Audit
+
+Verify:
+
+- All interactive labs work.
+- Buttons perform meaningful actions.
+- Code examples produce correct outputs.
+- Simulators update their state correctly.
+- Quizzes validate answers.
+- Reset functionality works.
+- Progress tracking persists appropriately.
+- Navigation works.
+- Responsive layouts function correctly.
+- Keyboard accessibility is supported.
+
+## Technical Audit
+
+Verify:
+
+- No runtime errors
+- No broken imports
+- No missing dependencies
+- No broken routes
+- No console errors during normal use
+- No fabricated execution results
+- No exposed credentials
+- No unsafe unrestricted code execution
+
+## Educational Audit
+
+For every lesson, verify:
+
+- What is it?
+- Why is it used?
+- When is it used?
+- How does it work?
+- Is there a beginner explanation?
+- Is there a Data Analytics example?
+- Is there an interactive demonstration?
+- Is there a practical exercise?
+- Is there a validation method?
+- Is there a quiz or knowledge check?
+
+Do not mark a lesson complete merely because its heading exists.
+
+---
+
+# 12. IMPLEMENTATION WORKFLOW
+
+Follow these phases.
+
+### Phase 1 — Requirements and Architecture
+
+Analyze the existing project, if any.
+
+Create a curriculum-to-component mapping and identify reusable components.
+
+### Phase 2 — Design System and Navigation
+
+Build the application shell, homepage, sidebar, course dashboard, and module navigation.
+
+### Phase 3 — Curriculum Content
+
+Implement all 10 modules with complete explanations and examples.
+
+### Phase 4 — Interactive Laboratories
+
+Implement the Git simulator, Copilot demonstrations, prompt builder, debugging exercises, SQL lab, Data Analytics lab, and agent workflow simulator.
+
+### Phase 5 — Assessment System
+
+Implement quizzes, challenges, feedback, and progress tracking.
+
+### Phase 6 — Integration and Testing
+
+Connect lessons with their interactive exercises and validate functionality.
+
+### Phase 7 — Final Audit
+
+Test the complete application against the curriculum and functional requirements.
+
+Fix confirmed issues and rerun relevant tests.
+
+---
+
+# FINAL EXPECTED RESULT
+
+Deliver a complete interactive learning platform titled:
+
+**GitHub Copilot for Data Analytics — Interactive Learning Lab**
+
+The platform must provide a structured 10-day / 20-hour learning journey covering Git, GitHub, GitHub Copilot, prompt engineering, code generation, debugging, testing, refactoring, SQL, Pandas, NumPy, EDA, visualization, collaboration, agents, customization, and a complete capstone project.
+
+The website must prioritize:
+
+**Deep Understanding + Visual Learning + Real Interaction + Practical Application + Code Validation + Industry Readiness**
+
+The result must be suitable for an instructor to use in classroom sessions and for students to practice independently.
+
+Do not stop after creating the homepage or module outlines.
+
+Implement the complete learning experience, verify the functionality, and provide a final report showing which requirements are completed, partially completed, or blocked, with supporting evidence.
+
+Do not claim completion without verification.
